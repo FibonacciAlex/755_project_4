@@ -7,12 +7,19 @@ import time
 import os
 import json
 import pprint # Pretty print
+import statsmodels.formula.api as smf
+import numpy as np
+# from python_scripts.handle_model_util import handle_yt_date, handle_tr_data, train_model
 
 # Path & URL Strings:
 top_ten_json_path = "./top_ten.json"
 yt_api = "https://yt.lemnoslife.com/noKey/"
 
 only_run_first = True
+
+
+#All models after training
+trained_models = []
 
 
 # Functions:
@@ -156,6 +163,7 @@ def fetch_yt_videos_data(top_ten_items: list, api: str):
 
     for i, item in enumerate(list_of_dfs):
         item.to_csv(f"yt_data_{i}.csv", index=False)
+    
     return list_of_dfs
 
 
@@ -166,13 +174,35 @@ def fetch_yt_videos_data(top_ten_items: list, api: str):
 try:
     # Read top ten from file:
     top_ten = read_top_ten(top_ten_json_path)
+    print(top_ten)
 
     # Fetch trends - currently set to only fetch first news item! (palestine)
-    #trends = fetch_trends_data(top_ten["top_ten"].tolist())
+    trends = fetch_trends_data(top_ten["top_ten"].tolist())
     
-
     fetch_yt_videos_data(top_ten["top_ten"].tolist(), yt_api)
+    # print(trends_data)
 
+    #yt data should be fetch by API 
+    # yt_data = fetch_yt_videos_data(top_ten['top_ten'].tolist())
+    # trends_data = pd.read_csv('./python_scripts/trends.csv')
+    # yt_data = []
+    # yt_data[0] = pd.read_csv('./python_scripts/yt_data_0.csv')
+    # print(yt_data)
+
+    train_way = 1  #1= linear/poly linear    2=kNN  
+
+    #handle yt data, for example, yt_data is a list, each one represents one lebel's data
+    #but one label may have several videos in the same date   
+
+    # for i, value in yt_data:
+    #     formated_yt_data = handle_yt_date(yt_data)
+    #     # pick up target trend data
+    #     formated_tr_data = handle_tr_data(trends_data.iloc[:,[0,i]].copy())
+
+    #     train_data = pd.merge(formated_yt_data, formated_tr_data,on='date', how='inner')
+        
+    #     trained_models[i] = train_model(train_data, train_way)
+    
 
 
 except Exception as e:
