@@ -150,12 +150,12 @@ def fetch_yt_videos_data(top_ten_items: list, api: str):
         data = []
         for i, val in enumerate(final_results[entry]):
             data.append({
-                "date": final_results[entry][i]["metadata"]["date"],
-                "id": final_results[entry][i]["metadata"]["id"],
-                "views": int(final_results[entry][i]["items"][0]["statistics"]["viewCount"]),
-                "likes": int(final_results[entry][i]["items"][0]["statistics"]["viewCount"]),
-                "comments": int(final_results[entry][i]["items"][0]["statistics"]["commentCount"]),
-                "favourites": int(final_results[entry][i]["items"][0]["statistics"]["favoriteCount"])
+                "date": val["metadata"]["date"],
+                "id": val["metadata"]["id"],
+                "views": int(val["items"][0]["statistics"]["viewCount"]) if val["items"][0]["statistics"].get("viewCount") is not None else 0,
+                "likes": int(val["items"][0]["statistics"]["likeCount"]) if val["items"][0]["statistics"].get("likeCount") is not None else 0,
+                "comments": int(val["items"][0]["statistics"]["commentCount"]) if val["items"][0]["statistics"].get("commentCount") is not None else 0,
+                "favourites": int(val["items"][0]["statistics"]["favoriteCount"]) if val["items"][0]["statistics"].get("favoriteCount") is not None else 0
             })
         df = pd.DataFrame(data, index=None)
         print(df)
