@@ -332,7 +332,7 @@ class RunModels:
         y_pred = 0;
 
         if model_type == "knn":
-            model = KNeighborsRegressor(n_neighbors=2, metric=custom_distance)
+            model = KNeighborsRegressor(n_neighbors=5, metric=custom_distance)
         elif model_type == "linearregression":
             model = LinearRegression()
         elif model_type == "randomforest":
@@ -353,9 +353,10 @@ class RunModels:
                 #'lambda_l1': 0.1,
                 #'lambda_l2': 0.1,
                 #'min_gain_to_split': 0.1,
+                'n_estimators': 10,
                 'verbose': -1
             }
-            bst = lgb.train(params, train_data, 100)
+            bst = lgb.train(params, train_data, 10)
             y_pred = bst.predict(X_test, num_iteration=bst.best_iteration)
             y_pred = pd.Series(y_pred)
             y_pred.index = y_test.index
