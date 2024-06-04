@@ -1,3 +1,10 @@
 respone.json.bak
+__pycache__/
+notebook/.ipynb_checkpoints/
 __pycache__/fetch_and_process_data.cpython-39.pyc
 __pycache__/handle_model_util.cpython-39.pyc
+Final Report Files - Group 2/__pycache__/TrendProcesses.cpython-39.pyc
+Final Report Files - Group 2/__pycache__/TrendProcesses.cpython-310.pyc
+notebook/.ipynb_checkpoints/Project4_model-checkpoint.ipynb
+notebook/__pycache__/handle_model_util.cpython-39.pyc
+Final Report Files - Group 2/.ipynb_checkpoints/Report - The News Trend Predictor - Data Mastery Group Project-checkpoint.ipynb
